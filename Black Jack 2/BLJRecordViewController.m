@@ -33,8 +33,12 @@
 {
     self.mostMoneyLabel.text = [NSString stringWithFormat:@"$%d", self.mostMoney];
     self.dateOfMostMoneyLabel.text = self.dateOfMostMoney;
+    
     self.mostConsecutiveRoundsLabel.text = [NSString stringWithFormat:@"%d", self.mostConsecutiveRounds];
     self.dateOfMostConsecutiveRoundsLabel.text = self.dateOfMostConsecutiveRounds;
+    
+    self.largestBetLabel.text = [NSString stringWithFormat:@"$%d", self.largestBet];
+    self.dateOfLargestBetLabel.text = self.dateOfLargestBet;
 }
 
 - (void)didReceiveMemoryWarning

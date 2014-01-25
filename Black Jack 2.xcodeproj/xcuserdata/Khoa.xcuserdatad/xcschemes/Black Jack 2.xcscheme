@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D278F529188504DA00329E45"
-               BuildableName = "Black Jack 2.app"
+               BuildableName = "Blackjack.app"
                BlueprintName = "Black Jack 2"
                ReferencedContainer = "container:Black Jack 2.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D278F529188504DA00329E45"
-            BuildableName = "Black Jack 2.app"
+            BuildableName = "Blackjack.app"
             BlueprintName = "Black Jack 2"
             ReferencedContainer = "container:Black Jack 2.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D278F529188504DA00329E45"
-            BuildableName = "Black Jack 2.app"
+            BuildableName = "Blackjack.app"
             BlueprintName = "Black Jack 2"
             ReferencedContainer = "container:Black Jack 2.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D278F529188504DA00329E45"
-            BuildableName = "Black Jack 2.app"
+            BuildableName = "Blackjack.app"
             BlueprintName = "Black Jack 2"
             ReferencedContainer = "container:Black Jack 2.xcodeproj">
          </BuildableReference>

@@ -76,9 +76,9 @@
 		D278F5CE188508CA00329E45 /* 9H.png in Resources */ = {isa = PBXBuildFile; fileRef = D278F59A188508CA00329E45 /* 9H.png */; };
 		D278F5CF188508CA00329E45 /* 9S.png in Resources */ = {isa = PBXBuildFile; fileRef = D278F59B188508CA00329E45 /* 9S.png */; };
 		D2940314188B1DDD007DEC0F /* BLJRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2940313188B1DDD007DEC0F /* BLJRecordViewController.m */; };
-		D2940316188B4531007DEC0F /* casino chips.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D2940315188B4531007DEC0F /* casino chips.jpeg */; };
 		D29740B9188A434500D0443B /* BLJChangeBetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29740B8188A434500D0443B /* BLJChangeBetViewController.m */; };
 		D29740BB188A65E200D0443B /* Light Red Background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D29740BA188A65E200D0443B /* Light Red Background.jpeg */; };
+		D29A7DBA18938A56006DB95B /* Poker_Chips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D29A7DB918938A56006DB95B /* Poker_Chips.jpg */; };
 		D29BDFFA1886347A00B0988D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BDFF91886347A00B0988D /* AVFoundation.framework */; };
 		D29BE0431886D5B500B0988D /* TurnCard.caf in Resources */ = {isa = PBXBuildFile; fileRef = D29BE0421886D5B500B0988D /* TurnCard.caf */; };
 		D29BE0451886DBED00B0988D /* Losing Sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = D29BE0441886DBED00B0988D /* Losing Sound.wav */; };
@@ -98,7 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D278F52A188504DA00329E45 /* Black Jack 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Black Jack 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D278F52A188504DA00329E45 /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D278F52D188504DA00329E45 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D278F52F188504DA00329E45 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D278F531188504DA00329E45 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -174,10 +174,10 @@
 		D278F59B188508CA00329E45 /* 9S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9S.png; sourceTree = "<group>"; };
 		D2940312188B1DDD007DEC0F /* BLJRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLJRecordViewController.h; sourceTree = "<group>"; };
 		D2940313188B1DDD007DEC0F /* BLJRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLJRecordViewController.m; sourceTree = "<group>"; };
-		D2940315188B4531007DEC0F /* casino chips.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "casino chips.jpeg"; sourceTree = "<group>"; };
 		D29740B7188A434500D0443B /* BLJChangeBetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLJChangeBetViewController.h; sourceTree = "<group>"; };
 		D29740B8188A434500D0443B /* BLJChangeBetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLJChangeBetViewController.m; sourceTree = "<group>"; };
 		D29740BA188A65E200D0443B /* Light Red Background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Light Red Background.jpeg"; sourceTree = "<group>"; };
+		D29A7DB918938A56006DB95B /* Poker_Chips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Poker_Chips.jpg; sourceTree = "<group>"; };
 		D29BDFF91886347A00B0988D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D29BE0421886D5B500B0988D /* TurnCard.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurnCard.caf; sourceTree = "<group>"; };
 		D29BE0441886DBED00B0988D /* Losing Sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Losing Sound.wav"; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		D278F52B188504DA00329E45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D278F52A188504DA00329E45 /* Black Jack 2.app */,
+				D278F52A188504DA00329E45 /* Blackjack.app */,
 				D278F54B188504DA00329E45 /* Black Jack 2Tests.xctest */,
 			);
 			name = Products;
@@ -265,7 +265,7 @@
 				D29BE0461886DC1400B0988D /* Winning Sound.caf */,
 				D278F567188508CA00329E45 /* Card Images */,
 				D278F545188504DA00329E45 /* Images.xcassets */,
-				D2940315188B4531007DEC0F /* casino chips.jpeg */,
+				D29A7DB918938A56006DB95B /* Poker_Chips.jpg */,
 				D278F5621885050500329E45 /* Light Green Background.jpeg */,
 				D29740BA188A65E200D0443B /* Light Red Background.jpeg */,
 				D278F534188504DA00329E45 /* Supporting Files */,
@@ -378,7 +378,7 @@
 			);
 			name = "Black Jack 2";
 			productName = "Black Jack 2";
-			productReference = D278F52A188504DA00329E45 /* Black Jack 2.app */;
+			productReference = D278F52A188504DA00329E45 /* Blackjack.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D278F54A188504DA00329E45 /* Black Jack 2Tests */ = {
@@ -451,6 +451,7 @@
 				D278F5631885050500329E45 /* Light Green Background.jpeg in Resources */,
 				D278F5CD188508CA00329E45 /* 9D.png in Resources */,
 				D278F546188504DA00329E45 /* Images.xcassets in Resources */,
+				D29A7DBA18938A56006DB95B /* Poker_Chips.jpg in Resources */,
 				D278F5AB188508CA00329E45 /* 13S.png in Resources */,
 				D278F5B6188508CA00329E45 /* 3H.png in Resources */,
 				D278F5A6188508CA00329E45 /* 12H.png in Resources */,
@@ -485,7 +486,6 @@
 				D278F5C9188508CA00329E45 /* 8D.png in Resources */,
 				D278F538188504DA00329E45 /* InfoPlist.strings in Resources */,
 				D278F5BD188508CA00329E45 /* 5D.png in Resources */,
-				D2940316188B4531007DEC0F /* casino chips.jpeg in Resources */,
 				D278F5B2188508CA00329E45 /* 2H.png in Resources */,
 				D278F5A2188508CA00329E45 /* 11H.png in Resources */,
 				D278F59F188508CA00329E45 /* 10S.png in Resources */,
@@ -658,7 +658,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Black Jack 2/Black Jack 2-Prefix.pch";
 				INFOPLIST_FILE = "Black Jack 2/Black Jack 2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blackjack;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -674,7 +674,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Black Jack 2/Black Jack 2-Prefix.pch";
 				INFOPLIST_FILE = "Black Jack 2/Black Jack 2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blackjack;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};

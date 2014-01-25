@@ -43,9 +43,11 @@
 }
 
 - (IBAction)done:(id)sender {
-    if  (self.betValue==nil || [self.betValue.text integerValue]==0)
+    int maxBet = self.money-self.currentRoundBetAmount;
+    if  (self.betValue==nil || [self.betValue.text integerValue]==0 || [self.betValue.text intValue] > maxBet)
     {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Invalid input" message:@"Please enter a non-zero number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *message = [NSString stringWithFormat:@"Please enter a non-zero number that is smaller than %d", maxBet];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Invalid input" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
     else{
@@ -54,7 +56,11 @@
 }
 
 - (IBAction)cancel {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    //the condition prevent player to hit the "Cancel" button to peek at the card.
+    if (self.currentRoundBetAmount > 0) {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 

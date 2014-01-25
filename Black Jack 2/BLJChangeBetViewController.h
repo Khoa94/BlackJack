@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *message;
 @property (weak, nonatomic) id <BLJChangeBetViewControllerDelegate> delegate;
 @property (assign, nonatomic) NSInteger money;
+@property (assign, nonatomic) NSInteger currentRoundBetAmount;
 - (IBAction)done:(id)sender;
 - (IBAction)cancel;
 

@@ -18,6 +18,8 @@
 
 @implementation BLJMainViewController {
     int currentRoundBetAmount, nextRoundBetAmount, playerPoints, AIPoints, HitButtonCounter, numberOfRemainingCards, AIHitCounter, round;
+    //all integers are initialize to 0 as default
+    
     NSMutableArray *remainingCards;
     AVAudioPlayer *dealCardSound;
     AVAudioPlayer *LoseSound;
@@ -26,8 +28,6 @@
     int AINumberOfAce;
     NSString *losingMessage;
     NSString *winningMessage;
-    NSString *dateOfMostMoney;
-    NSString *dateOfMostConsecutiveRounds;
     BOOL madeFirstBet;
 }
 
@@ -38,7 +38,8 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd MMMM, YYYY' at 'hh:mm a"];
         NSString *resultString = [dateFormatter stringFromDate: currentTime];
-        dateOfMostMoney = resultString;
+        NSString *dateOfMostMoney = resultString;
+        [[NSUserDefaults standardUserDefaults] setObject:dateOfMostMoney forKey:@"dateOfMostMoney"];
     }
 }
 
@@ -48,6 +49,7 @@
     return currentScore;
 }
 
+
 - (void) saveMostConsecutiveRounds{
     if (round > [self getMostConsecutiveRounds]) {
         [[NSUserDefaults standardUserDefaults] setObject:@(round) forKey:@"mostConsecutiveRounds"];
@@ -55,7 +57,8 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd MMMM, YYYY' at 'hh:mm a"];
         NSString *resultString = [dateFormatter stringFromDate: currentTime];
-        dateOfMostConsecutiveRounds = resultString;
+        NSString *dateOfMostConsecutiveRounds = resultString;
+        [[NSUserDefaults standardUserDefaults] setObject:dateOfMostConsecutiveRounds forKey:@"dateOfMostConsecutiveRounds"];
     }
 }
 
@@ -66,33 +69,69 @@
 }
 
 
+- (void) saveLargestBet {
+    if (currentRoundBetAmount > [self getLargestBet]) {
+        [[NSUserDefaults standardUserDefaults] setInteger:currentRoundBetAmount forKey:@"largestBet"];
+        NSDate *currentTime = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd MMMM, YYYY' at 'hh:mm a"];
+        NSString *resultString = [dateFormatter stringFromDate: currentTime];
+        NSString *dateOfLargestBet = resultString;
+        [[NSUserDefaults standardUserDefaults] setObject:dateOfLargestBet forKey:@"dateOfLargestBet"];
+    }
+}
+
+-(int) getLargestBet
+{
+    int currentLargestBet = [[NSUserDefaults standardUserDefaults] integerForKey:@"largestBet"];
+    return currentLargestBet;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    madeFirstBet = NO;
-    [self resetMoney];
+    //load saved progress
+    round = [[NSUserDefaults standardUserDefaults] integerForKey:@"round"];
+    if (round != 0){
+        currentRoundBetAmount = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentRoundBetAmount"];
+        self.currentRoundBetLabel.text = [NSString stringWithFormat:@"Current round's bet: $%d", currentRoundBetAmount];
+        self.nextRoundBetLabel.text = [NSString stringWithFormat:@"Next round's bet: $%d", currentRoundBetAmount];
+        
+        self.money = [[NSUserDefaults standardUserDefaults] integerForKey:@"money"];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Money: $%d", self.money];
+        
+        madeFirstBet =  YES;
+    }
+    
+    else {
+        round++;
+        [self resetMoney];
+        madeFirstBet = NO;
+    }
+    
+    self.roundLabel.text = [NSString stringWithFormat:@"Round %d", round];
     remainingCards = [[NSMutableArray alloc] initWithCapacity:51];
     [self resetCardDeck];
     [self playDealCardSound];
     [self drawCardAtBeginning];
-    round++;
-    self.roundLabel.text = [NSString stringWithFormat:@"Round %d", round];
-    
-    NSInteger currentScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"mostMoney"];
-    
-    NSLog(@"mostMoney: %d", currentScore);
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    static BOOL askedUserForBet = NO;
-    if (! askedUserForBet ) {
+    if (madeFirstBet == NO && round==1) {
         [self performSegueWithIdentifier:@"changeBet" sender:nil];
-        askedUserForBet = YES;
     }
+}
+
+- (void) saveProgress{
+    [[NSUserDefaults standardUserDefaults] setInteger:round forKey:@"round"];
+    [[NSUserDefaults standardUserDefaults] setInteger:currentRoundBetAmount forKey:@"currentRoundBetAmount"];
+    [[NSUserDefaults standardUserDefaults] setInteger:nextRoundBetAmount forKey:@"nextRoundBetAmount"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.money forKey:@"money"];
 }
 
 -(void) resetCardDeck
@@ -170,7 +209,7 @@
 
 - (void) resetMoney {
     self.money = 3000;
-    self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+    self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
 }
 
 - (card*) drawCard{
@@ -193,10 +232,11 @@
     self.roundLabel.text = [NSString stringWithFormat:@"Round %d", round];
     
     [self saveMostConsecutiveRounds];
+    [self saveLargestBet];
     
     if (nextRoundBetAmount != 0){
         currentRoundBetAmount = nextRoundBetAmount;
-        self.currentRoundBetLabel.text = [NSString stringWithFormat:@"Current rounds's bet: %d", currentRoundBetAmount];
+        self.currentRoundBetLabel.text = [NSString stringWithFormat:@"Current rounds's bet: $%d", currentRoundBetAmount];
     }
     
     playerPoints = 0;
@@ -220,6 +260,7 @@
     
     [self resetCardDeck];
     [self drawCardAtBeginning];
+    [self saveProgress];
 }
 
 - (void)didReceiveMemoryWarning
@@ -285,12 +326,12 @@
         [alertView show];
         [self playWinningSound];
         self.money = self.money + currentRoundBetAmount;
-        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
     }
     else if (AIPoints > playerPoints){
         [self playLosingSound];
         self.money = self.money - currentRoundBetAmount;
-        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:losingMessage message:@"The dealer gets closer to 21 than you. Better luck next time!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
@@ -302,7 +343,7 @@
         }
         [self playWinningSound];
         self.money = self.money + currentRoundBetAmount;
-        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
     }
     else {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"It's a draw" message:@"You can do better!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -354,7 +395,7 @@
     if (playerPoints > 21) {
         [self playLosingSound];
         self.money = self.money - currentRoundBetAmount;
-        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:losingMessage message:@"You're busted. Better luck next time!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
@@ -365,7 +406,7 @@
         [alertView show];
         [self playWinningSound];
         self.money = self.money + currentRoundBetAmount;
-        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: %d", self.money];
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
     }
     
     [self saveMostMoney];
@@ -373,7 +414,9 @@
 
 - (IBAction)startOver {
     round = 0;
+    madeFirstBet = NO;
     [self resetMoney];
+    [self performSegueWithIdentifier:@"changeBet" sender:nil];
     [self newRound];
 }
 
@@ -393,7 +436,7 @@
     }
     else {
         [self startOver];
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"You're out of money" message:@"The game now restarts." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"You're out of money!" message:@"The game now restarts." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
 }
@@ -401,13 +444,13 @@
 -(void)betViewController:(BLJChangeBetViewController *)betViewController didFinishEnterBetWithValue:(NSInteger)betValue{
     if (madeFirstBet == NO){
         currentRoundBetAmount = betValue;
-        self.currentRoundBetLabel.text = [NSString stringWithFormat:@"Current rounds's bet: %d", currentRoundBetAmount];
+        self.currentRoundBetLabel.text = [NSString stringWithFormat:@"Current rounds's bet: $%d", currentRoundBetAmount];
         madeFirstBet =YES;
-        self.nextRoundBetLabel.text = [NSString stringWithFormat:@"Next rounds's bet: %d", currentRoundBetAmount];
+        self.nextRoundBetLabel.text = [NSString stringWithFormat:@"Next rounds's bet: $%d", currentRoundBetAmount];
     }
     else {
         nextRoundBetAmount = betValue;
-        self.nextRoundBetLabel.text = [NSString stringWithFormat:@"Next rounds's bet: %d", nextRoundBetAmount];
+        self.nextRoundBetLabel.text = [NSString stringWithFormat:@"Next rounds's bet: $%d", nextRoundBetAmount];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -417,16 +460,16 @@
         BLJChangeBetViewController *betViewController = (BLJChangeBetViewController *)segue.destinationViewController;
         betViewController.delegate = self;
         betViewController.money = self.money;
+        betViewController.currentRoundBetAmount = currentRoundBetAmount;
     }
     else if ([segue.identifier isEqualToString:@"record"]) {
-        NSInteger currentMostMoney = [self getMostMoney];
-        NSInteger currentMostConsecutiveRounds = [self getMostConsecutiveRounds];
         BLJRecordViewController *recordViewController = (BLJRecordViewController *)segue.destinationViewController;
-        recordViewController.mostMoney = currentMostMoney;
-        recordViewController.dateOfMostMoney = dateOfMostMoney;
-        recordViewController.mostConsecutiveRounds = currentMostConsecutiveRounds;
-        recordViewController.dateOfMostConsecutiveRounds = dateOfMostConsecutiveRounds;
-        NSLog(@"The date of the most consecutive round %@", dateOfMostConsecutiveRounds);
+        recordViewController.mostMoney = [self getMostMoney];
+        recordViewController.dateOfMostMoney = [[NSUserDefaults standardUserDefaults] stringForKey:@"dateOfMostMoney"];
+        recordViewController.mostConsecutiveRounds = [self getMostConsecutiveRounds];
+        recordViewController.dateOfMostConsecutiveRounds = [[NSUserDefaults standardUserDefaults] stringForKey:@"dateOfMostConsecutiveRounds"];
+        recordViewController.largestBet = [self getLargestBet];
+        recordViewController.dateOfLargestBet = [[NSUserDefaults standardUserDefaults] stringForKey:@"dateOfLargestBet"];
     }
 }
 
