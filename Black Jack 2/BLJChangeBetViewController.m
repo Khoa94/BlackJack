@@ -57,7 +57,7 @@
 
 - (IBAction)cancel {
     
-    //the condition prevent player to hit the "Cancel" button to peek at the card.
+    //the if statement prevents the player to hit the "Cancel" button to peek at the card.
     if (self.currentRoundBetAmount > 0) {
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
