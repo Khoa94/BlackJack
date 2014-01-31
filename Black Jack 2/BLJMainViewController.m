@@ -196,6 +196,7 @@
                                                ofType:@"wav"]];
     LoseSound = [[AVAudioPlayer alloc] initWithContentsOfURL:musicFile error:nil];
     [LoseSound play];
+    LoseSound.volume = 0.7f;
 }
 
 -(void)playWinningSound
@@ -322,14 +323,21 @@
 
 - (void)AIDrawCard
 {
-    self.aiHitTimer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(AIHit) userInfo:nil repeats:YES];
+    self.aiHitTimer =  [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(AIHit) userInfo:nil repeats:YES];
 }
 
 - (void)determineWinner{
     losingMessage = [NSString stringWithFormat:@"You've lost $%d", currentRoundBetAmount];
     winningMessage = [NSString stringWithFormat:@"You've won $%d", currentRoundBetAmount];
     
-    if (AIPoints > 21) {
+    if (AIHitCounter==5){
+        [self playLosingSound];
+        self.money = self.money - currentRoundBetAmount;
+        self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:losingMessage message:@"The dealer draws 5 cards without getting over 21" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if (AIPoints > 21) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:winningMessage message:@"The dealer is busted" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         [self playWinningSound];
