@@ -330,7 +330,7 @@
     losingMessage = [NSString stringWithFormat:@"You've lost $%d", currentRoundBetAmount];
     winningMessage = [NSString stringWithFormat:@"You've won $%d", currentRoundBetAmount];
     
-    if (AIHitCounter==5){
+    if (AIHitCounter==5 && AIPoints<=21){
         [self playLosingSound];
         self.money = self.money - currentRoundBetAmount;
         self.moneyLabel.text = [NSString stringWithFormat:@"Total money: $%d", self.money];
