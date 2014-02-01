@@ -397,7 +397,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="508"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Your goal of the game is to get closer to 21 than the dealer. The dealer only draw cards after you finish your turn. If the total points is larger than 21, it’s a busted. If you’re busted, you automatically lose. If the dealer is busted and your total points are no larger than 21, you win. You automatically win if your total points after drawing 5 cards are less than or equal to 21 (5-card Charlie rule). “Hit” means you draw 1 card. “Stand” means you satisfy with your cards and let the dealer draws. “Double Down” means you double your bet, draw 1 more card and “Stand”.
+                                <mutableString key="text">Your goal of the game is to get closer to 21 than the dealer. The dealer only draw cards after you finish your turn. If the total points is larger than 21, it’s a busted. If you’re busted, you automatically lose. If the dealer is busted and your total points are no larger than 21, you win. You/the dealer automatically win if your/his total points after drawing 5 cards are less than or equal to 21 (5-card Charlie rule). “Hit” means you draw 1 card. “Stand” means you satisfy with your cards and let the dealer draws. “Double Down” means you double your bet, draw 1 more card and “Stand”.
 
 Once you specify a bet, by default, that bet will be used for every round unless you press “Change Bet”. If you change your bet during a round, the new bet will be used in the next round, not the current round you’re playing.
 
@@ -411,7 +411,8 @@ I hope you enjoy the game as much as I enjoy making it.
 
 
 
-</string>
+
+</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
