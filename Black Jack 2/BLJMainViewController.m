@@ -398,6 +398,12 @@
         playerPoints += drawedCard.rank;
         self.playerPointsLabel.text = [NSString stringWithFormat:@"%d Points", playerPoints];}
     
+    //Automatically "stand" when the player's point is 21
+    if (playerPoints == 21)
+    {
+        [self stand];
+    }
+    
     losingMessage = [NSString stringWithFormat:@"You've lost $%d", currentRoundBetAmount];
     winningMessage = [NSString stringWithFormat:@"You've won $%d", currentRoundBetAmount];
     
