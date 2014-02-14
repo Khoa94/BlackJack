@@ -314,16 +314,14 @@
         self.AIPointsLabel.text = [NSString stringWithFormat:@"%d Points", AIPoints];
         AINumberOfAce--;
     }
-    
-    if (AIPoints >= 17) {
-        [self.aiHitTimer invalidate];
-        [self determineWinner];
-    }
 }
 
 - (void)AIDrawCard
 {
-    self.aiHitTimer =  [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(AIHit) userInfo:nil repeats:YES];
+    while (AIPoints<17) {
+        [self AIHit];
+    }
+    [self determineWinner];
 }
 
 - (void)determineWinner{
